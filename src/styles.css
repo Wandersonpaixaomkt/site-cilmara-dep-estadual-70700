@@ -45,22 +45,22 @@
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.75rem;
   --background: oklch(0.985 0.005 240);
   --foreground: oklch(0.15 0.02 250);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.15 0.02 250);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0.02 250);
-  --primary: oklch(0.42 0.2 255);
+  --primary: #0066CC;
   --primary-foreground: oklch(1 0 0);
-  --brand-blue: oklch(0.42 0.2 255);
+  --brand-blue: #0066CC;
   --brand-blue-foreground: oklch(1 0 0);
-  --brand-pink: oklch(0.65 0.18 0);
+  --brand-pink: #E91E8C;
   --brand-pink-foreground: oklch(1 0 0);
-  --brand-orange: oklch(0.72 0.18 50);
+  --brand-orange: #FF6600;
   --brand-orange-foreground: oklch(0.18 0.04 50);
-  --secondary: oklch(0.96 0.005 250);
+  --secondary: oklch(0.97 0.005 250);
   --secondary-foreground: oklch(0.15 0.02 250);
   --muted: oklch(0.95 0.005 250);
   --muted-foreground: oklch(0.5 0.01 250);
@@ -70,10 +70,10 @@
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.91 0.01 250);
   --input: oklch(0.91 0.01 250);
-  --ring: oklch(0.42 0.2 255);
-  --chart-1: oklch(0.42 0.2 255);
-  --chart-2: oklch(0.65 0.18 0);
-  --chart-3: oklch(0.72 0.18 50);
+  --ring: #0066CC;
+  --chart-1: #0066CC;
+  --chart-2: #E91E8C;
+  --chart-3: #FF6600;
   --chart-4: oklch(0.6 0.15 200);
   --chart-5: oklch(0.7 0.12 30);
 }
@@ -109,15 +109,15 @@
   }
 }
 
-.bg-blue-flat { background-color: var(--brand-blue); }
-.bg-blue-soft { background-color: oklch(0.95 0.04 255); }
-.bg-pink-flat { background-color: var(--brand-pink); }
-.bg-pink-soft { background-color: oklch(0.95 0.05 0); }
-.bg-orange-flat { background-color: var(--brand-orange); }
-.bg-orange-soft { background-color: oklch(0.95 0.06 50); }
-.text-blue-brand { color: var(--brand-blue); }
-.text-pink-brand { color: var(--brand-pink); }
-.text-orange-brand { color: var(--brand-orange); }
+.bg-blue-flat { background-color: #0066CC; }
+.bg-blue-soft { background-color: #EFF6FF; }
+.bg-pink-flat { background-color: #E91E8C; }
+.bg-pink-soft { background-color: #FDF2F8; }
+.bg-orange-flat { background-color: #FF6600; }
+.bg-orange-soft { background-color: #FFF7ED; }
+.text-blue-brand { color: #0066CC; }
+.text-pink-brand { color: #E91E8C; }
+.text-orange-brand { color: #FF6600; }
 
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
