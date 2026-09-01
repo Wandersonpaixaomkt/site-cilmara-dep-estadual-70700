@@ -14,30 +14,30 @@ export const Route = createFileRoute("/")({
 });
 
 const candidato = {
-  nome: "Maria Silva",
-  sobrenome: "Santos",
-  numero: "12345",
+  nome: "Cilmara",
+  sobrenome: "Bonfim",
+  numero: "70700",
   cargo: "Deputada Estadual",
   partido: "PSB",
-  estado: "São Paulo",
-  slogan: "Educação que transforma, Saúde que cuida, Futuro que соединae!",
+  estado: "Rio de Janeiro",
+  slogan: "Educação que transforma, Saúde que cuida, Futuro que conecta!",
   foto: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
-  bio: "Professora, mãe e ativista social com mais de 15 anos de atuação na vida pública. Formada em Pedagogia pela USP, especialização em Políticas Públicas e mestrado em Educação Inclusiva. Representou a comunidade durante dois mandatos como vereadora em São Paulo, onde aprovou 47 projetos de lei em prol da educação e inclusão.",
+  bio: "Cilmara Bonfim é candidate a Deputada Estadual pelo PSB do Rio de Janeiro. Formada em Gestão Pública, atua há mais de 15 anos na área social, com foco em educação, saúde e assistência às comunidades mais vulneráveis do estado.",
   experiencia: [
-    "Vereadora - Câmara Municipal de São Paulo (2017-2024)",
-    "Presidente da Comissão de Educação (2019-2021)",
-    "Professora da Rede Pública - 12 anos",
-    "Fundadora do Instituto EducaSP"
+    "Líder comunitária - RJ (2015-presente)",
+    "Presidenta de Associação de Moradores",
+    "Voluntária em projetos sociais",
+    "Atuação em políticas públicas"
   ],
   redes: {
-    facebook: "@MariaSilvaDeputada",
-    instagram: "@mariasilva_sp",
-    twitter: "@MariaSilvaSP",
-    youtube: "Canal Maria Silva"
+    facebook: "@CilmaraBonfim",
+    instagram: "@cilmarabonfim_rj",
+    twitter: "@CilmaraBonfimRJ",
+    youtube: "Canal Cilmara Bonfim"
   },
-  telefone: "(11) 99999-9999",
-  email: "contato@mariasilva.com.br",
-  endereco: "Av. Paulista, 1000 - Sala 501, São Paulo - SP"
+  telefone: "(21) 99999-9999",
+  email: "contato@cilmarabonfim.com.br",
+  endereco: "Av. Brasil, 1000 - Sala 301, Rio de Janeiro - RJ"
 };
 
 const propostas = [
