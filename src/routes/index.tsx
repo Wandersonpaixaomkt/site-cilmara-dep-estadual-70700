@@ -28,12 +28,10 @@ import {
   Shield,
   GraduationCap,
   Bus,
-  Heart,
-  Baby,
-  Flower2,
-  Scale,
 } from "lucide-react";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import fotoCandidata from "@/assets/candidata.png";
+import bannerCilmara from "@/assets/banner-cilmara.png";
+import logoCilmara from "@/assets/logo-cilmara.png";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -48,7 +46,7 @@ const candidato = {
   partido: "AVANTE",
   estado: "Pará",
   municipio: "Parauapebas",
-  foto: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
+  foto: fotoCandidata,
   telefone: "(94) 99999-9999",
   email: "contato@cilmarabonfim.com.br",
   cnpj: "68.462.229/0001-81",
@@ -123,8 +121,8 @@ const eixos = [
 ];
 
 const faqItems = [
-  { pergunta: "Quem é Cilmara Bonfim?", resposta: "Mulher surda, mãe, liderança comunitária de Parauapebas. Agente administrativa, inúmera da COMPED (Portaria DC492/25). Candidata a Deputada Estadual pelo AVANTE — 70700." },
-  { pergunta: "A candidata é surda?", resposta: "Sim. A campanha fala Libras. Cilmara nasceu surda e é usuária de Libras desde criança." },
+  { pergunta: "Quem é Cilmara Bonfim?", resposta: "Mulher surda, mãe, liderança comunitária de Parauapebas. Agente administrativa, coordenadora da COMPED (Portaria DC492/25). Candidata a Deputada Estadual pelo AVANTE — 70700." },
+  { pergunta: "A candidata é surda?", resposta: "Sim. A campanha fala Libras. Cilmara é usuária de Libras desde a infância." },
   { pergunta: "O que é a COMPED?", resposta: "Coordenadoria Municipal da Pessoa com Deficiência de Parauapebas. Cilmara assumiu a coordenação em 2025, pela Portaria DC492/25." },
   { pergunta: "Qual é o partido e o número?", resposta: "AVANTE — 70700. Pedido de registro no TSE em 31/08/2026." },
   { pergunta: "Quais propostas para PcD?", resposta: "Ciptea estadual, Central de Libras 24h, Escola Bilíngue, Residências Inclusivas, continuidade de medicamentos, intérpretes em serviços públicos e transporte acessível." },
@@ -181,10 +179,7 @@ function Home() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection("inicio")}>
-              <Avatar className="h-10 w-10 border-2 border-blue-600 ring-2 ring-blue-100">
-                <AvatarImage src={candidato.foto} alt={candidato.nome} />
-                <AvatarFallback className="bg-blue-600 text-white font-bold">{candidato.nome[0]}</AvatarFallback>
-              </Avatar>
+              <img src={logoCilmara} alt="Cilmara Bonfim" className="h-12 w-auto" />
               <div>
                 <p className="font-bold text-base leading-tight text-slate-900">{candidato.nome} {candidato.sobrenome}</p>
                 <p className="text-xs text-slate-500">{candidato.partido} • {candidato.numero} • {candidato.estado}</p>
@@ -219,7 +214,6 @@ function Home() {
 
       {/* Hero */}
       <section id="inicio" className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-20 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1920')] bg-cover bg-center opacity-5"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-blue-900/50"></div>
         <div className="container mx-auto px-4 relative">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -231,7 +225,7 @@ function Home() {
                 Inclusão começa onde a pessoa é ouvida.
               </h1>
               <p className="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Sou Cilmara Bonfim, mulher surda, mãe e liderança comunitária de Parauapebas. Conheço, por dentro, as barreiras que PcD, surdos, autistas, mães atípicas e cuidadoras enfrentam. Atuei como farmacêutica da COMPED e disputo a Assembleia do Pará para transformar essa vivência em direitos estaduais.
+                Sou Cilmara Bonfim, mulher surda, mãe e liderança comunitária de Parauapebas. Conheço, por dentro, as barreiras que PcD, surdos, autistas, mães atípicas e cuidadoras enfrentam. Atuei como coordenadora da COMPED e disputo a Assembleia do Pará para transformar essa vivência em direitos estaduais.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button
@@ -255,10 +249,9 @@ function Home() {
               <div className="relative">
                 <div className="absolute -inset-6 bg-amber-500 rounded-full opacity-20 blur-3xl"></div>
                 <div className="absolute -inset-2 bg-amber-500/30 rounded-full blur-2xl"></div>
-                <Avatar className="h-72 w-72 md:h-96 md:w-96 border-4 border-amber-500 shadow-2xl shadow-amber-500/20 relative z-10">
-                  <AvatarImage src={candidato.foto} alt={candidato.nome} className="object-cover" />
-                  <AvatarFallback className="text-5xl bg-blue-800 text-white">{candidato.nome[0]}</AvatarFallback>
-                </Avatar>
+                <div className="h-72 w-72 md:h-96 md:w-96 rounded-full border-4 border-amber-500 shadow-2xl shadow-amber-500/20 relative z-10 overflow-hidden bg-white">
+                  <img src={candidato.foto} alt={candidato.nome} className="w-full h-full object-cover" />
+                </div>
                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-amber-400 text-amber-950 px-8 py-3 rounded-full font-bold text-2xl shadow-xl shadow-amber-500/30 z-20">
                   70700
                 </div>
@@ -306,7 +299,7 @@ function Home() {
                       {candidato.nome} {candidato.sobrenome} é mulher surda, mãe e liderança comunitária de Parauapebas, no Pará. Nasceu em Tucuruí em 6 de outubro de 1982 e cresceu em Parauapebas, onde construiu vínculo com a comunidade surda, com famílias atípicas e com organizações da pessoa com deficiência.
                     </p>
                     <p className="text-slate-600 leading-relaxed text-base">
-                      Trabalha como agente administrativa. Em 2025, foi nomeada inúmera da Coordenadoria Municipal da Pessoa com Deficiência (COMPED), em Portaria DC492/25. Na COMPED, articulou ações de autismo, acessibilidade, cidadania e cuidado com mulheres PcD e mães atípicas.
+                      Trabalha como agente administrativa. Em 2025, foi nomeada coordenadora da Coordenadoria Municipal da Pessoa com Deficiência (COMPED), em Portaria DC492/25. Na COMPED, articulou ações de autismo, acessibilidade, cidadania e cuidado com mulheres PcD e mães atípicas.
                     </p>
                   </CardContent>
                 </Card>
@@ -418,8 +411,8 @@ function Home() {
                 </p>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { icon: Scale, text: "Votar leis estaduais que organizem políticas para PcD, surdos, TEA, mães atípicas e idosos" },
-                    { icon: Shield, text: "Fiscalizar secretarias, hospitais regionais e transporte" },
+                    { icon: Shield, text: "Votar leis estaduais que organizem políticas para PcD, surdos, TEA, mães atípicas e idosos" },
+                    { icon: AlertCircle, text: "Fiscalizar secretarias, hospitais regionais e transporte" },
                     { icon: GraduationCap, text: "Propor emendas ao orçamento para garantir serviços acessíveis" },
                     { icon: Users, text: "Realizar audiências públicas e reuniões com famílias, associações e municípios" },
                     { icon: Bus, text: "Encaminhar demandas do interior à máquina pública estadual" },
@@ -554,8 +547,27 @@ function Home() {
         </div>
       </section>
 
+      {/* Galeria - Em imagens */}
+      <section id="galeria" className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Em imagens</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">Fotos e materiais visuais oficiais da campanha.</p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
+          </div>
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
+            <Card className="border-0 shadow-xl shadow-blue-900/5 overflow-hidden">
+              <img src={bannerCilmara} alt="Banner Cilmara Bonfim — Lutando por mais inclusão" className="w-full h-auto" />
+            </Card>
+            <Card className="border-0 shadow-xl shadow-blue-900/5 overflow-hidden">
+              <img src={candidato.foto} alt="Cilmara Bonfim" className="w-full h-full object-cover" />
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section id="faq" className="py-24 bg-white">
+      <section id="faq" className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-16">
@@ -606,14 +618,14 @@ function Home() {
             <ol className="space-y-4">
               {[
                 "Dirija-se à sua seção eleitoral",
-                "Digite <strong>70700</strong> no teclado da urna",
+                "Digite 70700 no teclado da urna",
                 "Confirme o nome \"Cilmara Bonfim\" na tela"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-4">
                   <div className="bg-white text-green-700 w-8 h-8 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0 shadow-lg">
                     {i + 1}
                   </div>
-                  <span className="text-lg pt-1" dangerouslySetInnerHTML={{ __html: item }}></span>
+                  <span className="text-lg pt-1">{item}</span>
                 </li>
               ))}
             </ol>
@@ -782,10 +794,7 @@ function Home() {
           <div className="grid md:grid-cols-3 gap-10 mb-12">
             <div>
               <div className="flex items-center gap-3 mb-5">
-                <Avatar className="h-12 w-12 border-2 border-blue-400">
-                  <AvatarImage src={candidato.foto} alt={candidato.nome} />
-                  <AvatarFallback className="bg-blue-600 text-white font-bold">{candidato.nome[0]}</AvatarFallback>
-                </Avatar>
+                <img src={logoCilmara} alt="Cilmara Bonfim" className="h-12 w-auto bg-white rounded p-1" />
                 <div>
                   <p className="font-bold text-lg">{candidato.nome} {candidato.sobrenome}</p>
                   <p className="text-sm text-slate-400">{candidato.cargo} • {candidato.partido}</p>
@@ -800,6 +809,7 @@ function Home() {
                   { label: "Sobre", id: "quem-sou" },
                   { label: "Propostas", id: "eixos" },
                   { label: "Atuação", id: "atuacao" },
+                  { label: "Galeria", id: "galeria" },
                   { label: "FAQ", id: "faq" },
                   { label: "Contato", id: "contato" },
                 ].map((item) => (
