@@ -8,7 +8,6 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-
 import {
   Mail,
   Phone,
@@ -25,6 +24,14 @@ import {
   AlertCircle,
   Vote,
   ChevronDown,
+  Users,
+  Shield,
+  GraduationCap,
+  Bus,
+  Heart,
+  Baby,
+  Flower2,
+  Scale,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -55,8 +62,10 @@ const eixos = [
   {
     id: "eixo-1",
     icon: Accessibility,
+    iconBg: "bg-blue-100",
+    iconColor: "text-blue-600",
     titulo: "Inclusão e acessibilidade como direito",
-    cor: "bg-blue-100 text-blue-700",
+    cor: "bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200",
     propostas: [
       { num: 5, titulo: "Ciptea com validade estadual", desc: "Carteira de Identificação da Pessoa com TEA com validade estadual e atendimento prioritário real." },
       { num: 8, titulo: "Central de Libras 24h", desc: "Central de Libras 24 horas do Pará para atendimento remoto em língua brasileira de sinais." },
@@ -68,8 +77,10 @@ const eixos = [
   {
     id: "eixo-2",
     icon: Brain,
+    iconBg: "bg-purple-100",
+    iconColor: "text-purple-600",
     titulo: "TEA, mães atípicas e saúde mental",
-    cor: "bg-purple-100 text-purple-700",
+    cor: "bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200",
     propostas: [
       { num: 6, titulo: "Centros TEA Pará", desc: "Centros especializados em TEA em Belém, Santarém, Marabá e Paragominas." },
       { num: 7, titulo: "Mediador Escolar Inclusivo", desc: "Mediador Escolar Inclusivo para acompanhar alunos com deficiência nas escolas." },
@@ -80,8 +91,10 @@ const eixos = [
   {
     id: "eixo-3",
     icon: HeartHandshake,
+    iconBg: "bg-pink-100",
+    iconColor: "text-pink-600",
     titulo: "Autonomia e cuidado de mulheres e idosos",
-    cor: "bg-pink-100 text-pink-700",
+    cor: "bg-gradient-to-br from-pink-50 to-pink-100 border-pink-200",
     propostas: [
       { num: 1, titulo: "Lei Maria da Penha nos Municípios", desc: "DEAMs e Salas Lilás 24h em todos os municípios paraenses." },
       { num: 2, titulo: "Auxílio Recomeço Pará", desc: "Aluguel social + qualificação profissional para mulheres em situação de violência." },
@@ -95,8 +108,10 @@ const eixos = [
   {
     id: "eixo-4",
     icon: Palmtree,
+    iconBg: "bg-amber-100",
+    iconColor: "text-amber-600",
     titulo: "Mineração responsável e desenvolvimento",
-    cor: "bg-amber-100 text-amber-700",
+    cor: "bg-gradient-to-br from-amber-50 to-amber-100 border-amber-200",
     propostas: [
       { num: 16, titulo: "Fundo da Mineração", desc: "Fundo da Mineração com participação social e transparência." },
       { num: 17, titulo: "Contrapartida para PcD", desc: "Contrapartida da mineração para políticas de PcD nos municípios impactados." },
@@ -142,11 +157,15 @@ function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formType, setFormType] = useState("apoiar");
   const [formData, setFormData] = useState({ nome: "", email: "", telefone: "", mensagem: "" });
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Formulário enviado! Entraremos em contato em breve.");
-    setFormData({ nome: "", email: "", telefone: "", mensagem: "" });
+    setFormSubmitted(true);
+    setTimeout(() => {
+      setFormSubmitted(false);
+      setFormData({ nome: "", email: "", telefone: "", mensagem: "" });
+    }, 3000);
   };
 
   const shareWhatsApp = () => {
@@ -155,28 +174,41 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 border-2 border-blue-600">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection("inicio")}>
+              <Avatar className="h-10 w-10 border-2 border-blue-600 ring-2 ring-blue-100">
                 <AvatarImage src={candidato.foto} alt={candidato.nome} />
-                <AvatarFallback>{candidato.nome[0]}</AvatarFallback>
+                <AvatarFallback className="bg-blue-600 text-white font-bold">{candidato.nome[0]}</AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-bold text-base leading-tight">{candidato.nome} {candidato.sobrenome}</p>
-                <p className="text-xs text-muted-foreground">{candidato.partido} • {candidato.numero} • {candidato.estado}</p>
+                <p className="font-bold text-base leading-tight text-slate-900">{candidato.nome} {candidato.sobrenome}</p>
+                <p className="text-xs text-slate-500">{candidato.partido} • {candidato.numero} • {candidato.estado}</p>
               </div>
             </div>
-            <nav className="hidden md:flex items-center gap-4 text-sm">
-              <button onClick={() => scrollToSection("quem-sou")} className="hover:text-blue-600 transition-colors">Sobre</button>
-              <button onClick={() => scrollToSection("eixos")} className="hover:text-blue-600 transition-colors">Propostas</button>
-              <button onClick={() => scrollToSection("atuacao")} className="hover:text-blue-600 transition-colors">Atuação</button>
-              <button onClick={() => scrollToSection("faq")} className="hover:text-blue-600 transition-colors">FAQ</button>
-              <button onClick={() => scrollToSection("contato")} className="hover:text-blue-600 transition-colors">Contato</button>
-              <Button onClick={() => scrollToSection("como-votar")} className="bg-blue-600 hover:bg-blue-700 text-white">
+            <nav className="hidden md:flex items-center gap-1">
+              {[
+                { label: "Sobre", id: "quem-sou" },
+                { label: "Propostas", id: "eixos" },
+                { label: "Atuação", id: "atuacao" },
+                { label: "FAQ", id: "faq" },
+                { label: "Contato", id: "contato" },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                >
+                  {item.label}
+                </button>
+              ))}
+              <Button
+                onClick={() => scrollToSection("como-votar")}
+                className="ml-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg shadow-blue-600/25 font-semibold"
+              >
                 Vote 70700
               </Button>
             </nav>
@@ -185,37 +217,48 @@ function Home() {
       </header>
 
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-20 md:py-28">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1920')] bg-cover bg-center opacity-10"></div>
+      <section id="inicio" className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=1920')] bg-cover bg-center opacity-5"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-blue-900/50"></div>
         <div className="container mx-auto px-4 relative">
-          <div className="flex flex-col md:flex-row items-center gap-10">
-            <div className="flex-1 text-center md:text-left">
-              <Badge className="bg-amber-500 text-amber-900 mb-4 text-sm px-4 py-1">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <div className="flex-1 text-center lg:text-left">
+              <Badge className="bg-amber-500 text-amber-950 mb-6 text-sm px-4 py-1.5 font-semibold shadow-lg">
                 {candidato.cargo} • {candidato.partido} • {candidato.estado}
               </Badge>
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Inclusão começa onde a pessoa é ouvida.
               </h1>
-              <p className="text-lg text-blue-100 mb-6 leading-relaxed max-w-xl">
-                Sou Cilmara Bonfim, mulher surda, mãe e liderança comunitária de Parauapebas. Conheço, por dentro, as barreiras que PcD, surdos, autistas, mães atípicas e cuidadoras enfrentam. Atuei como inúmera da COMPED e disputo a Assembleia do Pará para transformar essa vivência em direitos estaduais.
+              <p className="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                Sou Cilmara Bonfim, mulher surda, mãe e liderança comunitária de Parauapebas. Conheço, por dentro, as barreiras que PcD, surdos, autistas, mães atípicas e cuidadoras enfrentam. Atuei como farmacêutica da COMPED e disputo a Assembleia do Pará para transformar essa vivência em direitos estaduais.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                <Button size="lg" onClick={() => scrollToSection("contato")} className="bg-green-600 hover:bg-green-700 text-lg px-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button
+                  size="lg"
+                  onClick={() => scrollToSection("contato")}
+                  className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-lg px-10 py-6 shadow-xl shadow-green-600/30 font-semibold transition-all duration-300 hover:scale-105"
+                >
                   Quero apoiar
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => scrollToSection("eixos")} className="border-white text-white hover:bg-white hover:text-blue-900 text-lg px-8">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => scrollToSection("eixos")}
+                  className="border-2 border-white/30 text-white hover:bg-white hover:text-blue-900 text-lg px-10 py-6 font-semibold transition-all duration-300"
+                >
                   Ver propostas
                 </Button>
               </div>
             </div>
             <div className="flex-shrink-0">
               <div className="relative">
-                <div className="absolute -inset-4 bg-amber-500 rounded-full opacity-20 blur-xl"></div>
-                <Avatar className="h-64 w-64 md:h-80 md:w-80 border-4 border-amber-500 shadow-2xl">
+                <div className="absolute -inset-6 bg-amber-500 rounded-full opacity-20 blur-3xl"></div>
+                <div className="absolute -inset-2 bg-amber-500/30 rounded-full blur-2xl"></div>
+                <Avatar className="h-72 w-72 md:h-96 md:w-96 border-4 border-amber-500 shadow-2xl shadow-amber-500/20 relative z-10">
                   <AvatarImage src={candidato.foto} alt={candidato.nome} className="object-cover" />
-                  <AvatarFallback className="text-4xl">{candidato.nome[0]}</AvatarFallback>
+                  <AvatarFallback className="text-5xl bg-blue-800 text-white">{candidato.nome[0]}</AvatarFallback>
                 </Avatar>
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-amber-500 text-amber-950 px-6 py-2 rounded-full font-bold text-xl shadow-lg">
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-amber-400 text-amber-950 px-8 py-3 rounded-full font-bold text-2xl shadow-xl shadow-amber-500/30 z-20">
                   70700
                 </div>
               </div>
@@ -225,9 +268,9 @@ function Home() {
       </section>
 
       {/* Aviso TSE */}
-      <div className="bg-amber-50 border-b border-amber-200 py-2">
+      <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border-b border-amber-200 py-3">
         <div className="container mx-auto px-4">
-          <p className="text-amber-800 text-sm text-center flex items-center justify-center gap-2">
+          <p className="text-amber-800 text-sm text-center flex items-center justify-center gap-2 font-medium">
             <AlertCircle className="h-4 w-4" />
             Pedido de registro no TSE em 31/08/2026 — aguardando julgamento
           </p>
@@ -235,57 +278,62 @@ function Home() {
       </div>
 
       {/* Quem é */}
-      <section id="quem-sou" className="py-20 bg-white">
+      <section id="quem-sou" className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Quem é Cilmara Bonfim</h2>
-              <Separator className="w-24 h-1 bg-blue-600 mx-auto" />
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Quem é Cilmara Bonfim</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto rounded-full"></div>
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="md:col-span-2">
-                <Card className="border-0 shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="text-2xl">{candidato.nomeCompleto}</CardTitle>
-                    <CardDescription className="text-base">{candidato.cargo} • {candidato.partido} • {candidato.estado}</CardDescription>
+            <div className="grid lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <Card className="border-0 shadow-xl shadow-blue-900/5 h-full">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center gap-4">
+                      <Avatar className="h-16 w-16 border-2 border-blue-600">
+                        <AvatarImage src={candidato.foto} alt={candidato.nome} />
+                        <AvatarFallback className="text-xl bg-blue-600 text-white">{candidato.nome[0]}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <CardTitle className="text-2xl text-slate-900">{candidato.nomeCompleto}</CardTitle>
+                        <CardDescription className="text-base mt-1">{candidato.cargo} • {candidato.partido} • {candidato.estado}</CardDescription>
+                      </div>
+                    </div>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground leading-relaxed">
+                  <CardContent className="space-y-5">
+                    <p className="text-slate-600 leading-relaxed text-base">
                       {candidato.nome} {candidato.sobrenome} é mulher surda, mãe e liderança comunitária de Parauapebas, no Pará. Nasceu em Tucuruí em 6 de outubro de 1982 e cresceu em Parauapebas, onde construiu vínculo com a comunidade surda, com famílias atípicas e com organizações da pessoa com deficiência.
                     </p>
-                    <p className="text-muted-foreground leading-relaxed">
-                      Trabalha como agente administrativa. Em 2025, foi nomeada alcoh da Coordenadoria Municipal da Pessoa com Deficiência (COMPED), em Portaria DC492/25. Na COMPED, articulou ações de autismo, acessibilidade, cidadania e cuidado com mulheres PcD e mães atípicas.
+                    <p className="text-slate-600 leading-relaxed text-base">
+                      Trabalha como agente administrativa. Em 2025, foi nomeada inúmera da Coordenadoria Municipal da Pessoa com Deficiência (COMPED), em Portaria DC492/25. Na COMPED, articulou ações de autismo, acessibilidade, cidadania e cuidado com mulheres PcD e mães atípicas.
                     </p>
                   </CardContent>
                 </Card>
               </div>
               <div>
-                <Card className="border-0 shadow-lg h-full">
+                <Card className="border-0 shadow-xl shadow-blue-900/5 h-full bg-gradient-to-br from-blue-50 to-white">
                   <CardHeader>
-                    <CardTitle className="text-lg">Experiência</CardTitle>
+                    <CardTitle className="text-lg text-slate-900 flex items-center gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-blue-600" />
+                      Experiência
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">Mulher surda, usuária de Libras</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">Mãe e liderança comunitária em Parauapebas</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">Agente administrativa com conhecimento da máquina pública</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">Coordenadora da COMPED (Portaria DC492/25)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">Histórico eleitoral: 2020, 2022, 2024 e 2026</span>
-                      </li>
+                    <ul className="space-y-4">
+                      {[
+                        "Mulher surda, usuária de Libras",
+                        "Mãe e liderança comunitária em Parauapebas",
+                        "Agente administrativa com conhecimento da máquina pública",
+                        "Coordenadora da COMPED (Portaria DC492/25)",
+                        "Histórico eleitoral: 2020, 2022, 2024 e 2026"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <CheckCircle2 className="h-4 w-4 text-blue-600" />
+                          </div>
+                          <span className="text-sm text-slate-700 leading-relaxed">{item}</span>
+                        </li>
+                      ))}
                     </ul>
                   </CardContent>
                 </Card>
@@ -296,52 +344,58 @@ function Home() {
       </section>
 
       {/* Trajetória */}
-      <section id="trajetoria" className="py-20 bg-slate-50">
+      <section id="trajetoria" className="py-24 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Trajetória</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">A campanha é construção. Cada etapa construiu a líder que sou hoje.</p>
-            <Separator className="w-24 h-1 bg-blue-600 mx-auto mt-4" />
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Trajetória</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">A campanha é construção. Cada etapa construiu a líder que sou hoje.</p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
           </div>
           <div className="max-w-3xl mx-auto">
-            <div className="space-y-6">
-              {[
-                { ano: "2020", evento: "Candidata a vereadora em Parauapebas", partido: "MDB 15100" },
-                { ano: "2022", evento: "Primeira disputa estadual", partido: "Republicanos 10800" },
-                { ano: "2024", evento: "Vereança em Parauapebas", partido: "AVANTE 70700" },
-                { ano: "2025", evento: "Posse na COMPED", partido: "Coordenadora Municipal da Pessoa com Deficiência" },
-                { ano: "2026", evento: "Candidata a Deputada Estadual", partido: "AVANTE 70700" },
-              ].map((item, i) => (
-                <div key={i} className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-20 h-20 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg">
-                    {item.ano}
+            <div className="relative">
+              <div className="absolute left-10 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-600 to-blue-300"></div>
+              <div className="space-y-8">
+                {[
+                  { ano: "2020", evento: "Candidata a vereadora em Parauapebas", partido: "MDB 15100", cor: "bg-slate-500" },
+                  { ano: "2022", evento: "Primeira disputa estadual", partido: "Republicanos 10800", cor: "bg-blue-600" },
+                  { ano: "2024", evento: "Vereança em Parauapebas", partido: "AVANTE 70700", cor: "bg-blue-600" },
+                  { ano: "2025", evento: "Posse na COMPED", partido: "Coordenadora Municipal da Pessoa com Deficiência", cor: "bg-green-600" },
+                  { ano: "2026", evento: "Candidata a Deputada Estadual", partido: "AVANTE 70700", cor: "bg-amber-500" },
+                ].map((item, i) => (
+                  <div key={i} className="relative flex gap-6 items-center pl-0">
+                    <div className={`${item.cor} text-white w-20 h-20 rounded-2xl flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-lg z-10`}>
+                      {item.ano}
+                    </div>
+                    <Card className="flex-1 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                      <CardContent className="pt-5 pb-5">
+                        <p className="font-semibold text-slate-900 text-lg">{item.evento}</p>
+                        <p className="text-sm text-slate-500 mt-1">{item.partido}</p>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <Card className="flex-1 border-0 shadow-md">
-                    <CardContent className="pt-4">
-                      <p className="font-semibold">{item.evento}</p>
-                      <p className="text-sm text-muted-foreground">{item.partido}</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Por que sou candidata */}
-      <section id="por-que" className="py-20 bg-white">
+      <section id="por-que" className="py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">Por que sou candidata</h2>
-            <Separator className="w-24 h-1 bg-blue-600 mx-auto mb-8" />
-            <blockquote className="text-xl md:text-2xl text-muted-foreground italic mb-8 leading-relaxed">
+            <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-amber-500 mx-auto mb-12 rounded-full"></div>
+            <blockquote className="text-2xl md:text-3xl font-medium mb-10 leading-relaxed text-blue-100 italic">
               "Minha história me ensinou que inclusão não pode ser promessa distante. Ela precisa estar na escola, na saúde, no trabalho, no transporte, na comunicação e no respeito."
             </blockquote>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+            <p className="text-lg text-blue-200 leading-relaxed mb-10">
               Porque inclusão não pode ser promessa distante. Precisa estar na escola, na saúde, no trabalho, no transporte, na comunicação e no respeito. Foi por isso que escolhi transformar vivência em luta coletiva — primeiro como ativista comunitária, depois na gestão da COMPED, agora na disputa pela Assembleia do Pará.
             </p>
-            <Button onClick={() => scrollToSection("eixos")} className="bg-blue-600 hover:bg-blue-700">
+            <Button
+              onClick={() => scrollToSection("eixos")}
+              className="bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-amber-950 font-semibold text-lg px-10 py-6 shadow-xl shadow-amber-500/30"
+            >
               Ver propostas por eixo
             </Button>
           </div>
@@ -349,29 +403,31 @@ function Home() {
       </section>
 
       {/* O que faz uma Deputada Estadual */}
-      <section id="cargo" className="py-20 bg-slate-50">
+      <section id="cargo" className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">O que faz uma Deputada Estadual</h2>
-              <Separator className="w-24 h-1 bg-blue-600 mx-auto" />
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">O que faz uma Deputada Estadual</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto rounded-full"></div>
             </div>
-            <Card className="border-0 shadow-lg">
-              <CardContent className="pt-6">
-                <p className="text-muted-foreground leading-relaxed mb-6">
+            <Card className="border-0 shadow-xl shadow-blue-900/5">
+              <CardContent className="pt-8 pb-8">
+                <p className="text-slate-600 leading-relaxed text-lg mb-8 max-w-3xl mx-auto text-center">
                   A Assembleia Legislativa do Pará vota leis, fiscaliza o Executivo, decide o orçamento do estado e recebe demandas dos municípios. Uma Deputada Estadual pode criar políticas estaduais de inclusão, indicar prioridades ao Executivo, fiscalizar secretarias e serviços, e propor emendas ao orçamento para áreas como saúde, educação, trabalho, mobilidade e acessibilidade.
                 </p>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    "Votar leis estaduais que organizem políticas para PcD, surdos, TEA, mães atípicas e idosos",
-                    "Fiscalizar secretarias, hospitais regionais e transporte",
-                    "Propor emendas ao orçamento para garantir serviços acessíveis",
-                    "Realizar audiências públicas e reuniões com famílias, associações e municípios",
-                    "Encaminhar demandas do interior à máquina pública estadual"
+                    { icon: Scale, text: "Votar leis estaduais que organizem políticas para PcD, surdos, TEA, mães atípicas e idosos" },
+                    { icon: Shield, text: "Fiscalizar secretarias, hospitais regionais e transporte" },
+                    { icon: GraduationCap, text: "Propor emendas ao orçamento para garantir serviços acessíveis" },
+                    { icon: Users, text: "Realizar audiências públicas e reuniões com famílias, associações e municípios" },
+                    { icon: Bus, text: "Encaminhar demandas do interior à máquina pública estadual" },
                   ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-slate-50">
-                      <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{item}</span>
+                    <div key={i} className="flex items-start gap-4 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 hover:shadow-md transition-shadow duration-300">
+                      <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                        <item.icon className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <span className="text-sm text-slate-700 leading-relaxed">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -382,29 +438,34 @@ function Home() {
       </section>
 
       {/* 4 Eixos */}
-      <section id="eixos" className="py-20 bg-white">
+      <section id="eixos" className="py-24 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Quatro eixos para o Pará inteiro</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">As 20 propostas da campanha estão organizadas em quatro eixos. O que cabe ao mandato assumimos como proposta. O que depende do Executivo ou do Congresso vira cobrança e articulação.</p>
-            <Separator className="w-24 h-1 bg-blue-600 mx-auto mt-4" />
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Quatro eixos para o Pará inteiro</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">As 20 propostas da campanha estão organizadas em quatro eixos. O que cabe ao mandato assumimos como proposta. O que depende do Executivo ou do Congresso vira cobrança e articulação.</p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {eixos.map((eixo, i) => {
               const Icon = eixo.icon;
               return (
-                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer" onClick={() => scrollToSection(`propostas-${eixo.id}`)}>
-                  <CardHeader>
-                    <div className={`w-14 h-14 rounded-xl ${eixo.cor} flex items-center justify-center mb-3`}>
-                      <Icon className="h-7 w-7" />
+                <Card
+                  key={i}
+                  className={`border-2 ${eixo.cor} hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer group`}
+                  onClick={() => scrollToSection(`propostas-${eixo.id}`)}
+                >
+                  <CardHeader className="pb-4">
+                    <div className={`w-16 h-16 rounded-2xl ${eixo.iconBg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className={`h-8 w-8 ${eixo.iconColor}`} />
                     </div>
-                    <CardTitle className="text-lg leading-tight">{eixo.titulo}</CardTitle>
+                    <CardTitle className="text-lg leading-tight text-slate-900 font-bold">{eixo.titulo}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-muted-foreground">{eixo.propostas.length} propostas</p>
-                    <Button variant="link" className="p-0 h-auto text-blue-600">
-                      Ver propostas <ChevronRight className="h-4 w-4 ml-1" />
-                    </Button>
+                    <p className="text-sm text-slate-600 mb-4">{eixo.propostas.length} propostas</p>
+                    <div className="flex items-center text-blue-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                      Ver propostas
+                      <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </CardContent>
                 </Card>
               );
@@ -414,35 +475,37 @@ function Home() {
       </section>
 
       {/* Propostas Detalhadas */}
-      <section id="propostas" className="py-20 bg-slate-50">
+      <section id="propostas" className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Propostas detalhadas</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Cada proposta traz o problema e o que o mandato pode fazer. Propostas marcadas como "exige Executivo/Congresso" são cobranças e indicações.</p>
-            <Separator className="w-24 h-1 bg-blue-600 mx-auto mt-4" />
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Propostas detalhadas</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">Cada proposta traz o problema e o que o mandato pode fazer. Propostas marcadas como "exige Executivo/Congresso" são cobranças e indicações.</p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
           </div>
 
           {eixos.map((eixo, i) => {
             const Icon = eixo.icon;
             return (
-              <div key={i} id={`propostas-${eixo.id}`} className="max-w-5xl mx-auto mb-12">
-                <div className={`flex items-center gap-3 mb-6 p-4 rounded-xl ${eixo.cor}`}>
-                  <Icon className="h-6 w-6" />
-                  <h3 className="text-xl font-bold">{eixo.titulo}</h3>
+              <div key={i} id={`propostas-${eixo.id}`} className="max-w-6xl mx-auto mb-16">
+                <div className={`flex items-center gap-4 mb-8 p-6 rounded-2xl ${eixo.cor} border-2`}>
+                  <div className={`w-14 h-14 rounded-xl ${eixo.iconBg} flex items-center justify-center`}>
+                    <Icon className={`h-7 w-7 ${eixo.iconColor}`} />
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900">{eixo.titulo}</h3>
                 </div>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-5">
                   {eixo.propostas.map((proposta, j) => (
-                    <Card key={j} className="border-0 shadow-md">
-                      <CardHeader className="pb-2">
-                        <div className="flex items-start gap-3">
-                          <div className="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    <Card key={j} className="border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300 group">
+                      <CardHeader className="pb-3 pt-5">
+                        <div className="flex items-start gap-4">
+                          <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-lg shadow-blue-600/20">
                             {proposta.num}
                           </div>
-                          <CardTitle className="text-base">{proposta.titulo}</CardTitle>
+                          <CardTitle className="text-base text-slate-900 font-semibold leading-snug group-hover:text-blue-700 transition-colors">{proposta.titulo}</CardTitle>
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm text-muted-foreground">{proposta.desc}</p>
+                        <p className="text-sm text-slate-600 leading-relaxed">{proposta.desc}</p>
                       </CardContent>
                     </Card>
                   ))}
@@ -454,31 +517,34 @@ function Home() {
       </section>
 
       {/* Atuação na COMPED */}
-      <section id="atuacao" className="py-20 bg-white">
+      <section id="atuacao" className="py-24 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Como tenho atuado</h2>
-              <Separator className="w-24 h-1 bg-blue-600 mx-auto" />
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Como tenho atuado</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto rounded-full"></div>
             </div>
-            <Card className="border-0 shadow-lg mb-8">
-              <CardContent className="pt-6">
-                <p className="text-muted-foreground leading-relaxed">
+            <Card className="border-0 shadow-xl shadow-blue-900/5 mb-10 bg-gradient-to-br from-blue-50 to-white">
+              <CardContent className="pt-8 pb-8">
+                <p className="text-slate-600 leading-relaxed text-lg text-center max-w-3xl mx-auto">
                   Em 2025, assumi a Coordenadoria Municipal da Pessoa com Deficiência (COMPED) de Parauapebas. Coordenei diversas ações de inclusão, acessibilidade e cuidado. Cada entrega é ato da Prefeitura com a COMPED. Quero levar essas entregas para o estado.
                 </p>
               </CardContent>
             </Card>
-            <div className="space-y-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {entregasCOMPED.map((entrega, i) => (
-                <Card key={i} className="border-0 shadow-md">
-                  <CardContent className="flex items-start gap-4 pt-4">
-                    <div className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">
-                      {entrega.mes}
+                <Card key={i} className="border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                  <CardContent className="pt-5 pb-5">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="bg-blue-100 text-blue-700 px-3 py-1.5 rounded-full text-sm font-semibold">
+                        {entrega.mes}
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-medium">{entrega.titulo}</p>
-                      <p className="text-sm text-muted-foreground">{entrega.local}</p>
-                    </div>
+                    <p className="font-semibold text-slate-900 mb-1">{entrega.titulo}</p>
+                    <p className="text-sm text-slate-500 flex items-center gap-1">
+                      <MapPin className="h-3 w-3" />
+                      {entrega.local}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
@@ -488,26 +554,29 @@ function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-20 bg-slate-50">
+      <section id="faq" className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Perguntas frequentes</h2>
-              <Separator className="w-24 h-1 bg-blue-600 mx-auto" />
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Perguntas frequentes</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto rounded-full"></div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {faqItems.map((item, i) => (
-                <div key={i} className="border rounded-lg overflow-hidden">
+                <div
+                  key={i}
+                  className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-300"
+                >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between text-left px-4 py-4 font-medium hover:bg-slate-50 transition-colors"
+                    className="w-full flex items-center justify-between text-left px-6 py-5 font-semibold text-slate-900 hover:bg-slate-50 transition-colors"
                     aria-expanded={openFaq === i}
                   >
-                    {item.pergunta}
-                    <ChevronDown className={`h-4 w-4 flex-shrink-0 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+                    <span className="pr-4 text-base">{item.pergunta}</span>
+                    <ChevronDown className={`h-5 w-5 flex-shrink-0 text-blue-600 transition-transform duration-300 ${openFaq === i ? "rotate-180" : ""}`} />
                   </button>
                   {openFaq === i && (
-                    <div className="px-4 pb-4 text-muted-foreground text-sm">
+                    <div className="px-6 pb-5 text-slate-600 text-base leading-relaxed border-t border-slate-100 pt-4">
                       {item.resposta}
                     </div>
                   )}
@@ -519,145 +588,186 @@ function Home() {
       </section>
 
       {/* Como Votar */}
-      <section id="como-votar" className="py-16 bg-gradient-to-r from-green-600 to-green-700 text-white">
+      <section id="como-votar" className="py-20 bg-gradient-to-br from-green-700 via-green-600 to-green-700 text-white">
         <div className="container mx-auto px-4 text-center">
-          <Vote className="h-16 w-16 mx-auto mb-4 opacity-90" />
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Como votar no dia da eleição</h2>
-          <div className="bg-white/10 backdrop-blur rounded-2xl p-8 max-w-xl mx-auto mb-8">
-            <p className="text-5xl font-bold mb-4">70700</p>
-            <p className="text-xl mb-2">Deputada Estadual</p>
-            <p className="text-lg opacity-90">Pará • AVANTE</p>
-            <p className="font-bold text-amber-300 mt-4">Cilmara Bonfim</p>
+          <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6">
+            <Vote className="h-10 w-10 opacity-90" />
           </div>
-          <div className="text-left max-w-xl mx-auto bg-white/10 backdrop-blur rounded-xl p-6 mb-8">
-            <p className="font-semibold mb-3">No dia da votação:</p>
-            <ol className="space-y-2">
-              <li className="flex items-start gap-2">
-                <span className="bg-white text-green-700 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
-                Dirija-se à sua seção eleitoral
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="bg-white text-green-700 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
-                Digite <strong>70700</strong> no teclado da urna
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="bg-white text-green-700 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
-                Confirme o nome "Cilmara Bonfim" na tela
-              </li>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">Como votar no dia da eleição</h2>
+          <div className="bg-white/15 backdrop-blur rounded-3xl p-10 max-w-xl mx-auto mb-10 shadow-2xl">
+            <p className="text-6xl md:text-7xl font-bold mb-4 tracking-tight">70700</p>
+            <p className="text-2xl mb-2 text-green-100">Deputada Estadual</p>
+            <p className="text-xl text-green-200">Pará • AVANTE</p>
+            <p className="font-bold text-amber-300 mt-6 text-2xl">Cilmara Bonfim</p>
+          </div>
+          <div className="text-left max-w-xl mx-auto bg-white/10 backdrop-blur rounded-2xl p-8 mb-10">
+            <p className="font-semibold mb-5 text-lg">No dia da votação:</p>
+            <ol className="space-y-4">
+              {[
+                "Dirija-se à sua seção eleitoral",
+                "Digite <strong>70700</strong> no teclado da urna",
+                "Confirme o nome \"Cilmara Bonfim\" na tela"
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-4">
+                  <div className="bg-white text-green-700 w-8 h-8 rounded-full flex items-center justify-center text-base font-bold flex-shrink-0 shadow-lg">
+                    {i + 1}
+                  </div>
+                  <span className="text-lg pt-1" dangerouslySetInnerHTML={{ __html: item }}></span>
+                </li>
+              ))}
             </ol>
           </div>
-          <Button size="lg" onClick={shareWhatsApp} className="bg-green-500 hover:bg-green-600 text-white">
+          <Button
+            size="lg"
+            onClick={shareWhatsApp}
+            className="bg-gradient-to-r from-green-500 to-green-400 hover:from-green-400 hover:to-green-300 text-green-950 font-semibold text-lg px-10 py-6 shadow-xl shadow-green-500/30 transition-all duration-300 hover:scale-105"
+          >
             <Share2 className="h-5 w-5 mr-2" /> Compartilhar no WhatsApp
           </Button>
         </div>
       </section>
 
       {/* Contato */}
-      <section id="contato" className="py-20 bg-white">
+      <section id="contato" className="py-24 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Fale com a campanha</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Escolha o tipo de contato e preencha o formulário. Responderemos assim que possível.</p>
-            <Separator className="w-24 h-1 bg-blue-600 mx-auto mt-4" />
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Fale com a campanha</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">Escolha o tipo de contato e preencha o formulário. Responderemos assim que possível.</p>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-6 rounded-full"></div>
           </div>
-          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
             {/* Formulário */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle>Envie uma mensagem</CardTitle>
-                <CardDescription>Selecione o assunto e preencha seus dados.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="tipo">Assunto</Label>
-                    <select
-                      id="tipo"
-                      value={formType}
-                      onChange={(e) => setFormType(e.target.value)}
-                      className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm"
-                    >
-                      {formOptions.map((opt) => (
-                        <option key={opt.value} value={opt.value}>{opt.label}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="nome">Nome</Label>
-                      <Input id="nome" placeholder="Seu nome completo" value={formData.nome} onChange={(e) => setFormData({...formData, nome: e.target.value})} required />
+            <div className="lg:col-span-3">
+              <Card className="border-0 shadow-xl shadow-blue-900/5 h-full">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-2xl text-slate-900">Envie uma mensagem</CardTitle>
+                  <CardDescription>Selecione o assunto e preencha seus dados.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {formSubmitted ? (
+                    <div className="text-center py-12">
+                      <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                        <CheckCircle2 className="h-8 w-8 text-green-600" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-slate-900 mb-2">Mensagem enviada!</h3>
+                      <p className="text-slate-600">Entraremos em contato em breve.</p>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="telefone">Telefone</Label>
-                      <Input id="telefone" placeholder="(00) 00000-0000" value={formData.telefone} onChange={(e) => setFormData({...formData, telefone: e.target.value})} />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">E-mail</Label>
-                    <Input id="email" type="email" placeholder="seu@email.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="mensagem">Mensagem</Label>
-                    <Textarea id="mensagem" placeholder="Escreva sua mensagem aqui..." className="min-h-[120px]" value={formData.mensagem} onChange={(e) => setFormData({...formData, mensagem: e.target.value})} />
-                  </div>
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                    Enviar Mensagem
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                      <div className="space-y-2">
+                        <Label htmlFor="tipo" className="text-slate-700 font-medium">Assunto</Label>
+                        <select
+                          id="tipo"
+                          value={formType}
+                          onChange={(e) => setFormType(e.target.value)}
+                          className="w-full h-12 px-4 rounded-lg border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                        >
+                          {formOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div className="space-y-2">
+                          <Label htmlFor="nome" className="text-slate-700 font-medium">Nome</Label>
+                          <Input
+                            id="nome"
+                            placeholder="Seu nome completo"
+                            value={formData.nome}
+                            onChange={(e) => setFormData({...formData, nome: e.target.value})}
+                            className="h-12 px-4 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="telefone" className="text-slate-700 font-medium">Telefone</Label>
+                          <Input
+                            id="telefone"
+                            placeholder="(00) 00000-0000"
+                            value={formData.telefone}
+                            onChange={(e) => setFormData({...formData, telefone: e.target.value})}
+                            className="h-12 px-4 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email" className="text-slate-700 font-medium">E-mail</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="seu@email.com"
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          className="h-12 px-4 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="mensagem" className="text-slate-700 font-medium">Mensagem</Label>
+                        <Textarea
+                          id="mensagem"
+                          placeholder="Escreva sua mensagem aqui..."
+                          className="min-h-[140px] px-4 py-3 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
+                          value={formData.mensagem}
+                          onChange={(e) => setFormData({...formData, mensagem: e.target.value})}
+                        />
+                      </div>
+                      <Button
+                        type="submit"
+                        className="w-full h-12 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold text-lg shadow-lg shadow-blue-600/25 transition-all duration-300 hover:scale-[1.02]"
+                      >
+                        Enviar Mensagem
+                      </Button>
+                    </form>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Informações */}
-            <div className="space-y-6">
-              <Card className="border-0 shadow-lg">
+            <div className="lg:col-span-2 space-y-6">
+              <Card className="border-0 shadow-xl shadow-blue-900/5">
                 <CardHeader>
-                  <CardTitle>Informações de contato</CardTitle>
+                  <CardTitle className="text-lg text-slate-900">Informações de contato</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <Phone className="h-5 w-5 text-blue-600" />
+                <CardContent className="space-y-5">
+                  {[
+                    { icon: Phone, label: "Telefone", value: candidato.telefone },
+                    { icon: Mail, label: "E-mail", value: candidato.email },
+                    { icon: MapPin, label: "CNPJ / Local", value: `${candidato.cnpj} • ${candidato.municipio}/${candidato.estado}` },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                        <item.icon className="h-5 w-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wide">{item.label}</p>
+                        <p className="font-medium text-slate-900 text-sm">{item.value}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Telefone</p>
-                      <p className="font-medium">{candidato.telefone}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <Mail className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">E-mail</p>
-                      <p className="font-medium">{candidato.email}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <MapPin className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">CNPJ</p>
-                      <p className="font-medium">{candidato.cnpj}</p>
-                      <p className="text-sm text-muted-foreground">{candidato.municipio}/{candidato.estado}</p>
-                    </div>
-                  </div>
+                  ))}
                 </CardContent>
               </Card>
 
-              <Card className="border-0 shadow-lg">
+              <Card className="border-0 shadow-xl shadow-blue-900/5">
                 <CardHeader>
-                  <CardTitle>Redes sociais</CardTitle>
+                  <CardTitle className="text-lg text-slate-900">Redes sociais</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <Button variant="outline" className="w-full justify-start">
-                      <Instagram className="h-4 w-4 mr-2" /> {redeSocial.instagram}
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start">
-                      <Facebook className="h-4 w-4 mr-2" /> {redeSocial.facebook}
-                    </Button>
-                  </div>
+                <CardContent className="space-y-3">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start h-12 px-4 border-slate-300 hover:border-blue-400 hover:bg-blue-50 transition-all"
+                  >
+                    <Instagram className="h-5 w-5 mr-3 text-pink-600" />
+                    {redeSocial.instagram}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start h-12 px-4 border-slate-300 hover:border-blue-400 hover:bg-blue-50 transition-all"
+                  >
+                    <Facebook className="h-5 w-5 mr-3 text-blue-600" />
+                    {redeSocial.facebook}
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -666,35 +776,46 @@ function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-12">
+      <footer className="bg-slate-900 text-white pt-16 pb-8">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="grid md:grid-cols-3 gap-10 mb-12">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <Avatar className="h-10 w-10 border-2 border-blue-400">
+              <div className="flex items-center gap-3 mb-5">
+                <Avatar className="h-12 w-12 border-2 border-blue-400">
                   <AvatarImage src={candidato.foto} alt={candidato.nome} />
-                  <AvatarFallback>{candidato.nome[0]}</AvatarFallback>
+                  <AvatarFallback className="bg-blue-600 text-white font-bold">{candidato.nome[0]}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-bold">{candidato.nome} {candidato.sobrenome}</p>
+                  <p className="font-bold text-lg">{candidato.nome} {candidato.sobrenome}</p>
                   <p className="text-sm text-slate-400">{candidato.cargo} • {candidato.partido}</p>
                 </div>
               </div>
-              <p className="text-slate-400 text-sm">Compromisso com inclusão, acessibilidade e direitos para todos os paraenses.</p>
+              <p className="text-slate-400 text-sm leading-relaxed">Compromisso com inclusão, acessibilidade e direitos para todos os paraenses.</p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Links Rápidos</h4>
-              <ul className="space-y-2 text-slate-400">
-                <li><button onClick={() => scrollToSection("quem-sou")} className="hover:text-white transition-colors">Sobre</button></li>
-                <li><button onClick={() => scrollToSection("eixos")} className="hover:text-white transition-colors">Propostas</button></li>
-                <li><button onClick={() => scrollToSection("atuacao")} className="hover:text-white transition-colors">Atuação</button></li>
-                <li><button onClick={() => scrollToSection("faq")} className="hover:text-white transition-colors">FAQ</button></li>
-                <li><button onClick={() => scrollToSection("contato")} className="hover:text-white transition-colors">Contato</button></li>
+              <h4 className="font-semibold mb-5 text-lg">Links Rápidos</h4>
+              <ul className="space-y-3 text-slate-400">
+                {[
+                  { label: "Sobre", id: "quem-sou" },
+                  { label: "Propostas", id: "eixos" },
+                  { label: "Atuação", id: "atuacao" },
+                  { label: "FAQ", id: "faq" },
+                  { label: "Contato", id: "contato" },
+                ].map((item) => (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => scrollToSection(item.id)}
+                      className="hover:text-white transition-colors duration-200"
+                    >
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Acessibilidade</h4>
-              <p className="text-slate-400 text-sm mb-2">Esta página é pensada para acesso em Libras. Vídeos legendados e navegação por teclado em breve.</p>
+              <h4 className="font-semibold mb-5 text-lg">Acessibilidade</h4>
+              <p className="text-slate-400 text-sm mb-3 leading-relaxed">Esta página é pensada para acesso em Libras. Vídeos legendados e navegação por teclado em breve.</p>
               <p className="text-slate-500 text-xs">Política de Privacidade e LGPD disponíveis mediante solicitação.</p>
             </div>
           </div>
@@ -703,7 +824,7 @@ function Home() {
             <p className="text-slate-400 text-sm">© 2026 {candidato.nome} {candidato.sobrenome} — Todos os direitos reservados</p>
             <div className="text-slate-500 text-xs text-center md:text-right">
               <p>CNPJ: {candidato.cnpj} • {candidato.municipio}/{candidato.estado}</p>
-              <p className="mt-1 text-amber-500">Pedido de registro no TSE em 31/08/2026 — aguardando julgamento</p>
+              <p className="mt-1 text-amber-400 font-medium">Pedido de registro no TSE em 31/08/2026 — aguardando julgamento</p>
             </div>
           </div>
         </div>
