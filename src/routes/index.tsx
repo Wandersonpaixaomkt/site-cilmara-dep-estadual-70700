@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
 import {
   Mail,
   Phone,
@@ -24,6 +24,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Vote,
+  ChevronDown,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -138,6 +139,7 @@ function Home() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formType, setFormType] = useState("apoiar");
   const [formData, setFormData] = useState({ nome: "", email: "", telefone: "", mensagem: "" });
 
@@ -493,14 +495,25 @@ function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Perguntas frequentes</h2>
               <Separator className="w-24 h-1 bg-blue-600 mx-auto" />
             </div>
-            <Accordion type="single" collapsible className="w-full">
+            <div className="space-y-2">
               {faqItems.map((item, i) => (
-                <AccordionItem key={i} value={`item-${i}`}>
-                  <AccordionTrigger className="text-left font-medium">{item.pergunta}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">{item.resposta}</AccordionContent>
-                </AccordionItem>
+                <div key={i} className="border rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between text-left px-4 py-4 font-medium hover:bg-slate-50 transition-colors"
+                    aria-expanded={openFaq === i}
+                  >
+                    {item.pergunta}
+                    <ChevronDown className={`h-4 w-4 flex-shrink-0 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-4 pb-4 text-muted-foreground text-sm">
+                      {item.resposta}
+                    </div>
+                  )}
+                </div>
               ))}
-            </Accordion>
+            </div>
           </div>
         </div>
       </section>
