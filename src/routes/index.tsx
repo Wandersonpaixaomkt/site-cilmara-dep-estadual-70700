@@ -33,6 +33,7 @@ import {
   Flower2,
   Scale,
 } from "lucide-react";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 export const Route = createFileRoute("/")({
   component: Home,
