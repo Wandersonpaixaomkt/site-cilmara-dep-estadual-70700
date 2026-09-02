@@ -14,11 +14,12 @@ import {
   Vote, ChevronDown, Users, Shield, GraduationCap, Bus, Menu, X,
   ArrowRight, Sparkles, Star, Target
 } from "lucide-react";
-import fotoCandidata from "@/assets/foto-candidata.png";
-import fotoCandidata2 from "@/assets/foto-candidata-2.png";
-import fotoCorporal from "@/assets/foto-corporal-cilmara.png";
-import bannerCilmara from "@/assets/banner-cilmara.png";
-import logoCilmara from "@/assets/logo-cilmara.png";
+// Imagens temporariamente desativadas para definicao do layout
+// import fotoCandidata from "@/assets/foto-candidata.png";
+// import fotoCandidata2 from "@/assets/foto-candidata-2.png";
+// import fotoCorporal from "@/assets/foto-corporal-cilmara.png";
+// import bannerCilmara from "@/assets/banner-cilmara.png";
+// import logoCilmara from "@/assets/logo-cilmara.png";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -29,8 +30,8 @@ const candidato = {
   nomeCompleto: "Cilmara Teixeira Bonfim Leal",
   numero: "70700", cargo: "Deputada Estadual",
   partido: "AVANTE", estado: "Pará", municipio: "Parauapebas",
-  foto: fotoCandidata, foto2: fotoCandidata2, fotoCorporal: fotoCorporal,
-  banner: bannerCilmara,
+  foto: "/assets/foto-candidata.png", foto2: "/assets/foto-candidata-2.png", fotoCorporal: "/assets/foto-corporal-cilmara.png",
+  banner: "/assets/banner-cilmara.png",
   telefone: "(94) 99999-9999",
   email: "contato@cilmarabonfim.com.br",
   cnpj: "68.462.229/0001-81",
@@ -200,7 +201,7 @@ function Home() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <button onClick={() => scrollToSection("inicio")} className="flex items-center gap-3 group cursor-pointer">
-              <img src={logoCilmara} alt="Cilmara Bonfim" className="h-11 w-auto" />
+              <div className="bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-medium" style="width:60px;height:44px">60x44</div>
               <div className="hidden sm:block">
                 <p className="font-bold text-base leading-tight text-slate-900 group-hover:text-blue-brand transition-colors">{candidato.nome} {candidato.sobrenome}</p>
                 <p className="text-xs" style={{ color: "#64748B" }}>{candidato.partido} · {candidato.numero} · {candidato.estado}</p>
@@ -264,12 +265,9 @@ function Home() {
       {/* ── Hero: Banner no topo ── */}
       <section id="inicio" className="relative overflow-hidden" style={{ backgroundColor: "#0066CC" }}>
         <div className="container mx-auto px-4 pt-0 pb-0">
-          <img
-            src={candidato.banner}
-            alt="Cilmara Bonfim — Candidata a Deputada Estadual 70700"
-            className="w-full h-auto block"
-            style={{ display: "block", width: "100%" }}
-          />
+          <div className="w-full bg-white flex items-center justify-center" style="height:400px">
+            <span className="text-sm text-slate-400 font-medium">Banner principal — largura total x 400px altura</span>
+          </div>
         </div>
         <div className="container mx-auto px-4 py-14 lg:py-20">
           <div className="max-w-3xl mx-auto text-center">
@@ -330,7 +328,7 @@ function Home() {
                     <CardHeader className="pt-8 pb-4">
                       <div className="flex items-center gap-4">
                         <Avatar className="h-20 w-20 border-2 flex-shrink-0" style={{ borderColor: "#0066CC" }}>
-                          <AvatarImage src={candidato.foto2} alt={candidato.nome} />
+                          <AvatarImage src="" alt="placeholder" />
                           <AvatarFallback className="font-bold text-xl" style={{ backgroundColor: "#0066CC", color: "white" }}>{candidato.nome[0]}</AvatarFallback>
                         </Avatar>
                         <div>
@@ -349,8 +347,8 @@ function Home() {
                     </CardContent>
                   </Card>
                   <div className="w-full md:w-56 lg:w-64 flex-shrink-0 hidden md:block">
-                    <div className="rounded-2xl overflow-hidden shadow-lg border-2 h-full" style={{ borderColor: "#E91E8C" }}>
-                      <img src={candidato.foto2} alt={candidato.nome} className="w-full h-full object-cover" />
+                    <div className="rounded-2xl overflow-hidden shadow-lg border-2 h-full flex items-center justify-center bg-white" style={{ borderColor: "#E91E8C" }}>
+                      <span className="text-xs text-slate-400 font-medium">280x350</span>
                     </div>
                   </div>
                 </div>
@@ -647,23 +645,23 @@ function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3" style={{ gridTemplateRows: "repeat(3, 200px)" }}>
               <AnimatedSection delay={50} className="col-span-2 row-span-2">
-                <div className="w-full h-full rounded-2xl overflow-hidden shadow-md hover-lift">
-                  <img src={candidato.foto} alt="Cilmara Bonfim" className="w-full h-full object-cover" />
+                <div className="w-full h-full rounded-2xl overflow-hidden shadow-md hover-lift bg-white border border-slate-200 flex items-center justify-center">
+                  <span className="text-xs text-slate-400 font-medium">Colspan2 x Rowspan2 — foto principal</span>
                 </div>
               </AnimatedSection>
               <AnimatedSection delay={100} className="row-span-1">
-                <div className="w-full h-full rounded-2xl overflow-hidden shadow-md hover-lift">
-                  <img src={candidato.foto2} alt="Cilmara Bonfim" className="w-full h-full object-cover" />
+                <div className="w-full h-full rounded-2xl overflow-hidden shadow-md hover-lift bg-white border border-slate-200 flex items-center justify-center">
+                  <span className="text-xs text-slate-400 font-medium">1/4 — foto 2</span>
                 </div>
               </AnimatedSection>
               <AnimatedSection delay={150} className="row-span-1">
-                <div className="w-full h-full rounded-2xl overflow-hidden shadow-md hover-lift">
-                  <img src={candidato.fotoCorporal} alt="Cilmara Bonfim" className="w-full h-full object-cover" />
+                <div className="w-full h-full rounded-2xl overflow-hidden shadow-md hover-lift bg-white border border-slate-200 flex items-center justify-center">
+                  <span className="text-xs text-slate-400 font-medium">1/4 — foto corporal</span>
                 </div>
               </AnimatedSection>
               <AnimatedSection delay={200} className="col-span-2 row-span-1">
-                <div className="w-full h-full rounded-2xl overflow-hidden shadow-md hover-lift">
-                  <img src={candidato.banner} alt="Cilmara Bonfim" className="w-full h-full object-cover" />
+                <div className="w-full h-full rounded-2xl overflow-hidden shadow-md hover-lift bg-white border border-slate-200 flex items-center justify-center">
+                  <span className="text-xs text-slate-400 font-medium">Colspan2 x Rowspan1 — banner</span>
                 </div>
               </AnimatedSection>
             </div>
@@ -717,8 +715,8 @@ function Home() {
 
           <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-center">
             <AnimatedSection delay={50}>
-              <div className="rounded-2xl overflow-hidden shadow-2xl border-4" style={{ borderColor: "#FF6600" }}>
-                <img src={candidato.fotoCorporal} alt="Cilmara Bonfim" className="w-full h-auto block" />
+              <div className="rounded-2xl overflow-hidden shadow-2xl border-4 bg-white flex items-center justify-center" style={{ borderColor: "#FF6600", height: "420px" }}>
+                <span className="text-sm text-slate-400 font-medium">Foto corpo inteiro — 400px largura</span>
               </div>
             </AnimatedSection>
 
@@ -879,7 +877,7 @@ function Home() {
           <div className="grid md:grid-cols-3 gap-9 mb-10">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <img src={logoCilmara} alt="Cilmara Bonfim" className="h-11 w-auto bg-white rounded-lg p-1" />
+                <div className="bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-medium" style="width:60px;height:44px">60x44</div>
                 <div>
                   <p className="font-bold text-base">{candidato.nome} {candidato.sobrenome}</p>
                   <p className="text-sm" style={{ color: "#64748B" }}>{candidato.cargo} · {candidato.partido}</p>
