@@ -142,3 +142,7 @@
   transform: translateY(-3px);
   box-shadow: 0 10px 30px oklch(0 0 0 / 0.1);
 }
+
+.bg-primary { background-color: #0066CC; }
+.text-primary { color: #0066CC; }
+.bg-primary\/10 { background-color: rgba(0, 102, 204, 0.1); }
