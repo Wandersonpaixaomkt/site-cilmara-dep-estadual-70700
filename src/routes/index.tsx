@@ -201,7 +201,7 @@ function Home() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <button onClick={() => scrollToSection("inicio")} className="flex items-center gap-3 group cursor-pointer">
-              <div className="bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-medium" style="width:60px;height:44px">60x44</div>
+              <div className="bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-medium" style={{width:"60px",height:"44px"}}>60x44</div>
               <div className="hidden sm:block">
                 <p className="font-bold text-base leading-tight text-slate-900 group-hover:text-blue-brand transition-colors">{candidato.nome} {candidato.sobrenome}</p>
                 <p className="text-xs" style={{ color: "#64748B" }}>{candidato.partido} · {candidato.numero} · {candidato.estado}</p>
@@ -265,7 +265,7 @@ function Home() {
       {/* ── Hero: Banner no topo ── */}
       <section id="inicio" className="relative overflow-hidden" style={{ backgroundColor: "#0066CC" }}>
         <div className="container mx-auto px-4 pt-0 pb-0">
-          <div className="w-full bg-white flex items-center justify-center" style="height:400px">
+          <div className="w-full bg-white flex items-center justify-center" style={{height:"400px"}}>
             <span className="text-sm text-slate-400 font-medium">Banner principal — largura total x 400px altura</span>
           </div>
         </div>
@@ -347,7 +347,7 @@ function Home() {
                     </CardContent>
                   </Card>
                   <div className="w-full md:w-56 lg:w-64 flex-shrink-0 hidden md:block">
-                    <div className="rounded-2xl overflow-hidden shadow-lg border-2 h-full flex items-center justify-center bg-white" style={{ borderColor: "#E91E8C" }}>
+                    <div className="rounded-2xl overflow-hidden shadow-lg border-2 h-full flex items-center justify-center bg-white" style={{borderColor:"#E91E8C",height:"350px"}}>
                       <span className="text-xs text-slate-400 font-medium">280x350</span>
                     </div>
                   </div>
@@ -877,7 +877,7 @@ function Home() {
           <div className="grid md:grid-cols-3 gap-9 mb-10">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-medium" style="width:60px;height:44px">60x44</div>
+                <div className="bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs text-slate-400 font-medium" style={{width:"60px",height:"44px"}}>60x44</div>
                 <div>
                   <p className="font-bold text-base">{candidato.nome} {candidato.sobrenome}</p>
                   <p className="text-sm" style={{ color: "#64748B" }}>{candidato.cargo} · {candidato.partido}</p>
