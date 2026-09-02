@@ -17,7 +17,7 @@ import {
 import fotoCandidata from "@/assets/foto-candidata.png";
 import fotoCandidata2 from "@/assets/foto-candidata-2.png";
 import fotoCorporal from "@/assets/foto-corporal-cilmara.png";
-import bannerCilmara from "@/assets/banner-cilmara-v2.png";
+import bannerCilmara from "@/assets/banner-cilmara.png";
 import logoCilmara from "@/assets/logo-cilmara.png";
 
 export const Route = createFileRoute("/")({
